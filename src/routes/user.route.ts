@@ -1,24 +1,21 @@
 import { Router } from 'express';
 import { signupController, loginController } from '../controller/user.controller';
-import * as controller from '../controller/init.controller';
+import { authMiddleware } from '../middleware/auth.middleware';
 
 
 const router = Router({ strict: true });
 
 
 
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
     res.send('user route');
 });
 
-import { getDbConnection } from '../database/mssql.database';
-import { authMiddleware } from '../middleware/auth.middleware';
 
 router.get('/profile', authMiddleware, (req, res) => {
-  res.json({ user: (req as any).user });
+    res.json({ user: req.user });
 });
 
-// GET /login (debug db) ยังอยู่ด้านบน
 
 // POST /login สำหรับ auth
 router.post('/login', loginController);

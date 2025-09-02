@@ -2,6 +2,8 @@ import { getDbConnection } from '../database/mssql.database';
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import { signup } from '../models/user.model';
+import jwt, { SignOptions } from 'jsonwebtoken';
+import { env } from '../config/env';
 
 export const loginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -39,12 +41,11 @@ export const loginController = async (req: Request, res: Response) => {
     
     // สร้าง JWT token
 
-    const jwt = require('jsonwebtoken');
-    const { env } = require('../config/env');
+
     const token = jwt.sign(
       { user_id, role, email: user_email, display_name },
       String(env.jwtSecret),
-      { expiresIn: String(env.jwtExpiresIn) }
+      { expiresIn: String(env.jwtExpiresIn) } as SignOptions
     );
 
     // set cookie

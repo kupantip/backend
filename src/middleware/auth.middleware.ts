@@ -10,9 +10,9 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
   try {
     const decoded = jwt.verify(token, String(env.jwtSecret));
     // เพิ่มข้อมูล user ลง req เช่น req.user = decoded;
-    (req as any).user = decoded;
+    req.user = decoded;
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Invalid token' });
+    return res.status(401).json({ message: 'Invalid token', error: (err as Error).message });
   }
 };
