@@ -14,7 +14,7 @@ export const init = async (): Promise<IResult<{ One: string }>> => {
       		,[created_at]
     		,[updated_at]
   			FROM [KUPantipDB].[dbo].[app_user]`
-			);
+		);
 		return dataResult;
 	} catch (error: unknown) {
 		if (error instanceof Error) {

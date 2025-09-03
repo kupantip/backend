@@ -6,8 +6,6 @@ import cookieParser from 'cookie-parser';
 import initRoute from './routes/init';
 import userRoute from './routes/user.route';
 
-
-
 const app = express();
 app.use(helmet());
 app.use(cors());

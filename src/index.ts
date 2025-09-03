@@ -2,7 +2,7 @@ import app from './app';
 import { env } from './config/env';
 
 app.get('/', (req, res) => {
-	res.send('Hello, World!');	
+	res.send('Hello, World!');
 });
 
 app.listen(env.port, () => {
